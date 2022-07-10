@@ -1,9 +1,7 @@
 package ru.job4j.cars.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "cars")
@@ -15,21 +13,25 @@ public class Car {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "engine_id")
-    private Engine engine;
+    @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "BRAND_ID_FK"))
+    private Brand brand;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "history_owner",
-            joinColumns = {@JoinColumn(name = "driver_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "car_id", nullable = false, updatable = false)})
-    private Set<Driver> drivers = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "type_id", foreignKey = @ForeignKey(name = "TYPE_ID_FK"))
+    private BodyType type;
+
+    @ManyToOne
+    @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
+    private Engine engine;
 
     public Car() {
     }
 
-    public Car(int id, String name, Engine engine) {
+    public Car(int id, String name, Brand brand, BodyType type, Engine engine) {
         this.id = id;
         this.name = name;
+        this.brand = brand;
+        this.type = type;
         this.engine = engine;
     }
 
@@ -49,24 +51,28 @@ public class Car {
         this.name = name;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public BodyType getType() {
+        return type;
+    }
+
+    public void setType(BodyType type) {
+        this.type = type;
+    }
+
     public Engine getEngine() {
         return engine;
     }
 
     public void setEngine(Engine engine) {
         this.engine = engine;
-    }
-
-    public Set<Driver> getDrivers() {
-        return drivers;
-    }
-
-    public void setDrivers(Set<Driver> drivers) {
-        this.drivers = drivers;
-    }
-
-    public void addDrivers(Driver driver) {
-        drivers.add(driver);
     }
 
     @Override
