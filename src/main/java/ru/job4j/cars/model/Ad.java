@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ads")
-public class Ad {
+public class Ad implements AdBuilder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -31,17 +31,6 @@ public class Ad {
     private User user;
 
     public Ad() {
-    }
-
-    public Ad(int id, String name, String description, byte[] photo, Date created, boolean status, Car car, User user) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.photo = photo;
-        this.created = created;
-        this.status = status;
-        this.car = car;
-        this.user = user;
     }
 
     public int getId() {
