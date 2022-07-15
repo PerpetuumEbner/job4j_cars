@@ -1,12 +1,17 @@
 package ru.job4j.cars.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ads")
-public class Ad implements AdBuilder {
+public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -29,9 +34,6 @@ public class Ad implements AdBuilder {
     @ManyToOne
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
     private User user;
-
-    public Ad() {
-    }
 
     public int getId() {
         return id;
