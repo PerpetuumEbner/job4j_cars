@@ -17,7 +17,7 @@ public class AdRepository implements Wrapper {
     public List actualAd() {
         LocalDateTime dateTime = LocalDateTime.now().minusDays(1);
         Timestamp actualTime = Timestamp.valueOf(dateTime);
-        return this.tx(session -> session.createQuery("select distinct a from Ad a where a.created < :actualTime")
+        return this.tx(session -> session.createQuery("select distinct a from Ad a where a.created > :actualTime")
                 .setParameter("actualTime", actualTime).list(), sf);
     }
 
