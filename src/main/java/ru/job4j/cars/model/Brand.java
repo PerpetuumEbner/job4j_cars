@@ -1,8 +1,15 @@
 package ru.job4j.cars.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "brands")
 public class Brand {
@@ -11,14 +18,6 @@ public class Brand {
     private int id;
 
     private String name;
-
-    public Brand() {
-    }
-
-    public Brand(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public int getId() {
         return id;

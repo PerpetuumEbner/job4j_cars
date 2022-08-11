@@ -1,8 +1,15 @@
 package ru.job4j.cars.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "types")
 public class BodyType {
@@ -11,14 +18,6 @@ public class BodyType {
     private int id;
 
     private String name;
-
-    public BodyType() {
-    }
-
-    public BodyType(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public int getId() {
         return id;

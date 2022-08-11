@@ -16,16 +16,16 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
-
-    private String description;
-
     private byte[] photo;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
+    private int mileage;
+
     private boolean status;
+
+    private int price;
 
     @ManyToOne
     @JoinColumn(name = "car_id", foreignKey = @ForeignKey(name = "CAR_ID_FK"))
@@ -41,22 +41,6 @@ public class Ad {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public byte[] getPhoto() {
@@ -75,12 +59,28 @@ public class Ad {
         this.created = created;
     }
 
+    public int getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(int mileage) {
+        this.mileage = mileage;
+    }
+
     public boolean isStatus() {
         return status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Car getCar() {

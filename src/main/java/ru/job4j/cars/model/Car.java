@@ -1,8 +1,15 @@
 package ru.job4j.cars.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "cars")
 public class Car {
@@ -10,11 +17,11 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    private int yearOfIssue;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "BRAND_ID_FK"))
-    private Brand brand;
+    @JoinColumn(name = "model_id", foreignKey = @ForeignKey(name = "MODEL_ID_FK"))
+    private Model model;
 
     @ManyToOne
     @JoinColumn(name = "type_id", foreignKey = @ForeignKey(name = "TYPE_ID_FK"))
@@ -24,17 +31,6 @@ public class Car {
     @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
     private Engine engine;
 
-    public Car() {
-    }
-
-    public Car(int id, String name, Brand brand, BodyType type, Engine engine) {
-        this.id = id;
-        this.name = name;
-        this.brand = brand;
-        this.type = type;
-        this.engine = engine;
-    }
-
     public int getId() {
         return id;
     }
@@ -43,20 +39,20 @@ public class Car {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getYearOfIssue() {
+        return yearOfIssue;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setYearOfIssue(int yearOfIssue) {
+        this.yearOfIssue = yearOfIssue;
     }
 
-    public Brand getBrand() {
-        return brand;
+    public Model getModel() {
+        return model;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     public BodyType getType() {

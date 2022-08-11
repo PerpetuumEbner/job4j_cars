@@ -11,13 +11,17 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "engines")
-public class Engine {
+@Table(name = "models")
+public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "BRAND_ID_FK"))
+    private Brand brand;
 
     public int getId() {
         return id;
@@ -35,6 +39,14 @@ public class Engine {
         this.name = name;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -43,8 +55,8 @@ public class Engine {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Engine engine = (Engine) o;
-        return id == engine.id;
+        Model model = (Model) o;
+        return id == model.id;
     }
 
     @Override

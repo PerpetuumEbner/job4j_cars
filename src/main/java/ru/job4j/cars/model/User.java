@@ -1,8 +1,15 @@
 package ru.job4j.cars.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -15,16 +22,6 @@ public class User {
     private String password;
 
     private String email;
-
-    public User() {
-    }
-
-    public User(int id, String name, String password, String email) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-    }
 
     public int getId() {
         return id;
