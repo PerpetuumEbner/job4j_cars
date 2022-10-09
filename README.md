@@ -3,6 +3,7 @@
 [![Java CI](https://github.com/PerpetuumEbner/job4j_cars/actions/workflows/maven.yml/badge.svg)](https://github.com/PerpetuumEbner/job4j_cars/actions/workflows/maven.yml)
 
 # Продажа автомобилей - Cars.
+## Запуск проекта происходит с помощью класса AdMin.
 
 ### 1. Главная страница.
 

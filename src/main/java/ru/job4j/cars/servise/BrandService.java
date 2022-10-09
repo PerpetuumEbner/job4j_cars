@@ -3,7 +3,7 @@ package ru.job4j.cars.servise;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cars.model.Brand;
-import ru.job4j.cars.persistence.BrandRepository;
+import ru.job4j.cars.repository.BrandRepository;
 
 import java.util.List;
 

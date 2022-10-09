@@ -1,4 +1,4 @@
-package ru.job4j.cars.persistence;
+package ru.job4j.cars.repository;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -19,7 +19,7 @@ public class BrandRepository implements Wrapper {
                 .setParameter("id", id).uniqueResult(), sf);
     }
 
-    public List findByAll() {
+    public List<BrandRepository> findByAll() {
         return this.tx(session -> session.createQuery("from Brand").list(), sf);
     }
 }

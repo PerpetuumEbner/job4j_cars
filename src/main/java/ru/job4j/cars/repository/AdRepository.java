@@ -1,4 +1,4 @@
-package ru.job4j.cars.persistence;
+package ru.job4j.cars.repository;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -37,7 +37,7 @@ public class AdRepository implements Wrapper {
                 .setParameter("id", id).uniqueResult(), sf);
     }
 
-    public List findByAll() {
+    public List<AdRepository> findByAll() {
         return this.tx(session -> session.createQuery("from Ad").list(), sf);
     }
 
@@ -51,24 +51,24 @@ public class AdRepository implements Wrapper {
                 .setParameter("id", id).executeUpdate(), sf);
     }
 
-    public List newAds() {
+    public List<AdRepository> newAds() {
         LocalDateTime dateTime = LocalDateTime.now().minusDays(1);
         Timestamp actualTime = Timestamp.valueOf(dateTime);
         return this.tx(session -> session.createQuery("select distinct a from Ad a where a.created > :actualTime")
                 .setParameter("actualTime", actualTime).list(), sf);
     }
 
-    public List myAds(int id) {
+    public List<AdRepository> myAds(int id) {
         return this.tx(session -> session.createQuery("select distinct a from Ad a where a.user.id = :id")
                 .setParameter("id", id).list(), sf);
     }
 
-    public List getAdPhoto() {
+    public List<AdRepository> getAdPhoto() {
         return this.tx(session -> session.createQuery("select distinct a from Ad a where a.photo != null")
                 .list(), sf);
     }
 
-    public List getAdBrand(String brandName) {
+    public List<Ad> getAdBrand(String brandName) {
         return this.tx(session -> session.createQuery("select distinct a from Ad a "
                         + "join fetch a.car c "
                         + "join fetch c.model m "
