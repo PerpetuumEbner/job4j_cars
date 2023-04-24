@@ -1,4 +1,4 @@
-package ru.job4j.cars.servise;
+package ru.job4j.cars.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;

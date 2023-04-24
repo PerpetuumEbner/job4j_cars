@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.cars.model.User;
-import ru.job4j.cars.servise.UserService;
+import ru.job4j.cars.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,7 +27,7 @@ public class UserController {
     public String addUser(Model model, @RequestParam(name = "fail", required = false) Boolean fail) {
         model.addAttribute("fail", fail != null);
         model.addAttribute("user", new User());
-        return "addUser";
+        return "/user/addUser";
     }
 
     @PostMapping("/registration")
@@ -54,7 +54,7 @@ public class UserController {
         model.addAttribute("users", user);
         model.addAttribute("fail", fail != null);
         model.addAttribute("user", new User());
-        return "login";
+        return "/user/login";
     }
 
     @PostMapping("/login")
@@ -73,6 +73,6 @@ public class UserController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/loginPage";
+        return "redirect:loginPage";
     }
 }

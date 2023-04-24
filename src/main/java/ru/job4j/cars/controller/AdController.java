@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.cars.model.Ad;
 import ru.job4j.cars.model.Car;
 import ru.job4j.cars.model.User;
-import ru.job4j.cars.servise.*;
+import ru.job4j.cars.service.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class AdController {
     public String findAds(Model model, HttpSession session) {
         userHttpSession(model, session);
         model.addAttribute("ads", adService.findByAll());
-        return "ads";
+        return "/advertisement/ads";
     }
 
     @GetMapping("/formAddAd")
@@ -63,7 +63,7 @@ public class AdController {
         model.addAttribute("brands", brandService.findByAll());
         model.addAttribute("types", bodyTypeService.findByAll());
         model.addAttribute("engines", engineService.findByAll());
-        return "addAd";
+        return "/advertisement/addAd";
     }
 
     @PostMapping("/createAd")
@@ -91,7 +91,7 @@ public class AdController {
         model.addAttribute("user", user);
         model.addAttribute("ad", adService.findByIdAd(id));
         model.addAttribute("condition", adService.findByIdAd(id).getUser().getId() == user.getId());
-        return "/ad";
+        return "/advertisement/ad";
     }
 
     @GetMapping("/delete/{adId}")
@@ -110,7 +110,7 @@ public class AdController {
         model.addAttribute("brand", brandService.findById(id));
         model.addAttribute("type", bodyTypeService.findById(id));
         model.addAttribute("engine", engineService.findById(id));
-        return "/updateAd";
+        return "/advertisement/updateAd";
     }
 
     @PostMapping("/updateAd")
@@ -125,14 +125,14 @@ public class AdController {
     public String actualAds(Model model, HttpSession session) {
         userHttpSession(model, session);
         model.addAttribute("ads", adService.newAds());
-        return "/ads";
+        return "/advertisement/ads";
     }
 
     @GetMapping("/myAds")
     public String myAds(Model model, HttpSession session) {
         User user = userHttpSession(model, session);
         model.addAttribute("ads", adService.myAds(user.getId()));
-        return "/ads";
+        return "/advertisement/ads";
     }
 
     @GetMapping("/buy/{adId}")

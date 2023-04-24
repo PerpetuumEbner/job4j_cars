@@ -1,5 +1,7 @@
 package ru.job4j.cars.repository;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.cars.model.User;
@@ -8,6 +10,8 @@ import java.util.Optional;
 
 @Repository
 public class UserRepository implements Wrapper {
+    private static final Logger LOG = LogManager.getLogger(UserRepository.class);
+
     private final SessionFactory sf;
 
     public UserRepository(SessionFactory sf) {
@@ -18,7 +22,7 @@ public class UserRepository implements Wrapper {
         try {
             this.tx(session -> session.save(user), sf);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return Optional.ofNullable(user);
     }
@@ -28,7 +32,7 @@ public class UserRepository implements Wrapper {
                 .setParameter("id", id).uniqueResult(), sf);
     }
 
-    public Optional<User> findUserByNameEmailAndPwd(String name, String email, String password) {
+    public Optional<User> findUserByNameEmailAndPassword(String name, String email, String password) {
         return this.tx(session -> session.createQuery(
                         "from User where name = :name and email = :email and password = :password"
                 )
